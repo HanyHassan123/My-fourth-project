@@ -2,7 +2,7 @@ Amazon Sales Analysis
 
 This project aims to analyze Amazon sales data to understand product performance, sales trends over time, and how different factors such as category or country influence sales outcomes.
 ![Dashboard](progect%204/2025-05-18.png)
-[Dowenload Dashboard]()
+[Dowenload Dashboard](progect%204/amazon%20sales.pbip)
 [Dowenload CSV file]()
 
 1-Project Objectives
