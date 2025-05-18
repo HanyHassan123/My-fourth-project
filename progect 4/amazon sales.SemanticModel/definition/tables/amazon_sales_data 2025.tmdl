@@ -1,0 +1,115 @@
+table 'amazon_sales_data 2025'
+	lineageTag: 50c8817d-97d6-48b8-a68a-6bb757a87731
+
+	column 'Order ID'
+		dataType: string
+		lineageTag: 002992b9-6239-4b11-89ef-aba4eb4db4f6
+		summarizeBy: none
+		sourceColumn: Order ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: string
+		lineageTag: fb27ae3c-1aad-439e-8a3a-7195dcbfdab9
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Product
+		dataType: string
+		lineageTag: 1d9c6f8b-8317-48a3-a11a-192b5c374611
+		summarizeBy: none
+		sourceColumn: Product
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		lineageTag: d47272ee-24d4-4967-9256-3042619e38a2
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column Price
+		dataType: int64
+		formatString: 0
+		lineageTag: e0dc3d3f-5a0e-42b9-a2ad-a07737b51dd1
+		summarizeBy: sum
+		sourceColumn: Price
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 393767d5-f3f8-41e3-8afb-97f42e9c47b3
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total Sales'
+		dataType: int64
+		formatString: 0
+		lineageTag: 56a1dbd6-4412-4b62-af01-489010c42bbf
+		summarizeBy: sum
+		sourceColumn: Total Sales
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Name'
+		dataType: string
+		lineageTag: 839c89f9-7cc5-45ec-b1b8-7d7af1be7b20
+		summarizeBy: none
+		sourceColumn: Customer Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Location'
+		dataType: string
+		lineageTag: 5ad92b85-2d4e-4273-a593-4b0a395f68a5
+		summarizeBy: none
+		sourceColumn: Customer Location
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Payment Method'
+		dataType: string
+		lineageTag: 9f162dfa-898a-43b9-a4b8-cd28df560b9d
+		summarizeBy: none
+		sourceColumn: Payment Method
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status
+		dataType: string
+		lineageTag: 0ca6484f-d7d5-4d80-8bd9-7994d1a39cee
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column Profit
+		dataType: int64
+		formatString: 0
+		lineageTag: efb06cb5-80b3-4c26-b45a-492076dc8fae
+		summarizeBy: sum
+		sourceColumn: Profit
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'amazon_sales_data 2025' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\My Fills\For course\progect 4\amazon_sales_data 2025.csv"),[Delimiter=",", Columns=12, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Order ID", type text}, {"Date", type text}, {"Product", type text}, {"Category", type text}, {"Price", Int64.Type}, {"Quantity", Int64.Type}, {"Total Sales", Int64.Type}, {"Customer Name", type text}, {"Customer Location", type text}, {"Payment Method", type text}, {"Status", type text}, {"Profit", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
